@@ -33,7 +33,7 @@ describe('Option Component', () => {
             ...props,
             text: 'Very Interested'
         };
-        expect(shallowOption().find('div p').text()).toBe('Very Interested');
+        expect(shallowOption().find('li').text()).toBe('Very Interested');
     });
 
     it('renders a given color', () => {
@@ -41,6 +41,6 @@ describe('Option Component', () => {
             ...props,
             color: 'green'
         };
-        expect(shallowOption().find('div').hasClass('background-green')).toBe(true);
+        expect(shallowOption().find('li').hasClass('background-green')).toBe(true);
     });
 });

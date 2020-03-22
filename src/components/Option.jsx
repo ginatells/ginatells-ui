@@ -2,9 +2,9 @@ import React from 'react';
 
 const Option = props => {
     return (
-        <div className={`background-${props.color}`}>
-            <p>{props.text}</p>
-        </div>
+        <li id={props.id} key={props.key} className={`list-group-item background-${props.color}`}>
+            {props.text}
+        </li>
     );
 };
 
