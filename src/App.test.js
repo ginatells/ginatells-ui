@@ -1,9 +1,22 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { shallow } from 'enzyme';
 import App from './App';
 
-test('renders learn react link', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+describe('App tests', () => {
+
+  let wrapper;
+
+  const shallowApp = () => {
+    if (!wrapper)
+        wrapper = shallow(<App/>);
+    return wrapper;
+};
+
+  beforeEach(() => {  
+    wrapper = null;
+  });
+
+  it('renders MainPage', () => {
+    expect(shallowApp().find('MainPage').exists()).toBe(true);
+  });
 });
