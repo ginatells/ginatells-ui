@@ -21,12 +21,20 @@ describe('MainPage Component', () => {
         ReactDOM.render(<MainPage/>, div);
     });
 
+    describe('Character Image', () => {
+        it('renders gina\'s  imagine inside a character div', () => {
+            const image = shallowMainPage().find('div#main-page div#character-div img#gina-img');
+            expect(image.exists()).toBe(true);
+            expect(image.prop('src')).toBe('gina.png');
+        });
+    });
+
     describe('List of Options', () => {
-        it('Constains an unordered list', () => {
-            expect(shallowMainPage().find('div#main-page ul#options-list').exists()).toBe(true);
+        it('constains an unordered list inside an options div', () => {
+            expect(shallowMainPage().find('div#main-page div#options-div ul#options-list').exists()).toBe(true);
         });
 
-        it('Renders 5 Options inside an unordered list', () => {
+        it('renders 5 Options inside an unordered list', () => {
             const unorderedlist = shallowMainPage().find('div#main-page ul#options-list');
             expect(unorderedlist.children()).toHaveLength(5);
             expect(unorderedlist.childAt(0).find('Option#op-one').exists()).toBe(true);
@@ -36,7 +44,7 @@ describe('MainPage Component', () => {
             expect(unorderedlist.childAt(4).find('Option#op-five').exists()).toBe(true);
         });
 
-        it('Renders correct text for each option', () => {
+        it('renders correct text for each option', () => {
             const unorderedlist = shallowMainPage().find('div#main-page ul#options-list');
             expect(unorderedlist.childAt(0).find('Option#op-one').prop('text')).toBe('Very Interested');
             expect(unorderedlist.childAt(1).find('Option#op-two').prop('text')).toBe('Interested');
