@@ -8,6 +8,7 @@ const MainPage = () => {
             <div id='character-div'>
                 <img id='gina-img' src={gina} className='App-logo' alt='Gina' />
             </div>
+            
             <div id='options-div'>
                 <ul id='options-list' className='list-group'>
                     <Option id='op-one' position={0} text={'Very Interested'} color={'green'}/>
