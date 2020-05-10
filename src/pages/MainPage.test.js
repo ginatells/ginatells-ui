@@ -46,7 +46,7 @@ describe('MainPage Component', () => {
 
         it('renders correct text for each option', () => {
             const unorderedlist = shallowMainPage().find('div#main-page ul#options-list');
-            expect(unorderedlist.childAt(0).find('Option#op-one').prop('text')).toBe('Very Interested');
+            expect(unorderedlist.childAt(0).find('Option#op-one').prop('text')).toBe('Very test error');
             expect(unorderedlist.childAt(1).find('Option#op-two').prop('text')).toBe('Interested');
             expect(unorderedlist.childAt(2).find('Option#op-three').prop('text')).toBe('Don\'t Care');
             expect(unorderedlist.childAt(3).find('Option#op-four').prop('text')).toBe('Not so Interested');
