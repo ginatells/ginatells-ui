@@ -6,9 +6,9 @@ import './MainPage.css';
 
 const MainPage = () => {
   return (
-    <div id='main-page' className='aClass centered'>
+    <div id='main-page' className='aClass'>
       <div id='character-div' className='col-6'>
-        <img id='gina-img' src={gina} className='App-logo' alt='Gina' />
+        <img id='gina-img' src={gina} className='gina' alt='Gina' />
       </div>
       <div id='question-options-div' className='col-6'>
         <Question />
