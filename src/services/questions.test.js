@@ -14,7 +14,6 @@ describe('Questions service', () => {
             fetchMock.getOnce(apiUrls.QUESTIONS, response);
 
             return QuestionsService.get().then(response => {
-                console.log('response: ', response);
                 expect(response.status).toBe(200);                
             });
         });
