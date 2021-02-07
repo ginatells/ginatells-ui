@@ -1,17 +1,12 @@
-import React from 'react';
-import balloon from '../images/balloon.png';
-import './Question.css';
+import { ERRORS } from '../utils/constants'
 
-const Question = ({question}) => {
-  const errorMessage = 'ERROR: Question not Found! Please, reload the page!';
-  const questionText = question || errorMessage;
-
+function Question({ text }) {
   return (
-    <div id='question-div' className='question-div'>
-      <img id='balloon-img' className='balloon' src={balloon}/>
-      <div id='text-question-div' className='text-question'>{questionText}</div>
+    <div style={{ backgroundImage: 'url(balloon.png)' }}>
+      <img />
+      {text || ERRORS.QUESTION_NOT_FOUND}
     </div>
-  );
-};
+  )
+}
 
-export default Question;
+export default Question
