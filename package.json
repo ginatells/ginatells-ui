@@ -2,30 +2,27 @@
   "name": "ginatells-ui",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.11.6",
-    "@testing-library/react": "^11.2.2",
-    "@testing-library/user-event": "^12.2.2",
-    "bootstrap": "^4.5.3",
-    "eslint": "^7.14.0",
-    "eslint-plugin-flowtype": "^5.2.0",
-    "fetch-mock": "^9.11.0",
-    "jquery": "^3.5.1",
-    "node-fetch": "^2.6.1",
-    "node-sass": "^5.0.0",
-    "popper.js": "^1.16.1",
-    "react": "^17.0.1",
-    "react-bootstrap": "^1.4.0",
-    "react-dom": "^17.0.1",
-    "react-scripts": "4.0.0",
-    "sass": "^1.29.0",
-    "typescript": "^4.1.2"
-  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "node-sass": "^5.0.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-scripts": "4.0.2"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.11.9",
+    "@testing-library/react": "^11.2.5",
+    "@testing-library/user-event": "^12.6.3",
+    "eslint": "^7.19.0",
+    "eslint-plugin-flowtype": "^5.2.0",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.6"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -41,9 +38,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.5"
   }
 }
