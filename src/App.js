@@ -1,17 +1,9 @@
-import React from 'react';
-import './App.css';
-import MainPage from './pages/MainPage';
+import Game from './pages/Game'
 
-const App = () => {
-  return (
-    <div className='App'>
-      <header className='App-header'>
-      </header>
-      <body className='App-body'>      
-        <MainPage/>        
-      </body>
-    </div>
-  );
-};
+function App () {
+  return (  
+    <Game/>
+  )
+}
 
-export default App;
+export default App
