@@ -1,10 +1,11 @@
 import { ERRORS } from '../utils/constants'
 
-function Question({ text }) {
+import './Question.scss'
+
+function Question({ text = ERRORS.QUESTION_NOT_FOUND }) {
   return (
-    <div style={{ backgroundImage: 'url(balloon.png)' }}>
-      <img />
-      {text || ERRORS.QUESTION_NOT_FOUND}
+    <div className='question'>
+      {text}
     </div>
   )
 }

@@ -1,4 +1,26 @@
-/* https://material-ui.com/customization/color/ */
+.game-container {
+  width: 550px;
+  height: 590px;
+  display: flex;
+  margin: 0 auto;
+  max-width: 550px;
+  margin-top: 50px;
+
+  & > div > ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+
+    & > li {
+      font-size: 1.5em;
+      margin: 10px;
+      border-radius: 0.25em;
+      transition: 0.3s;
+      padding: 10px;
+      cursor: pointer;
+    }
+  }
+}
 
 li.background-green { background-color: #a5d6a7; }
 li.background-green:hover { background-color: #66bb6a; }
