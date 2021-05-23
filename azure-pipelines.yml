@@ -1,8 +1,3 @@
-# Node.js with React
-# Build a Node.js project that uses React.
-# Add steps that analyze code, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
-
 trigger:
   branches:
     include:
@@ -13,11 +8,45 @@ pool:
 
 variables:
   - group: AWS
+  - name: DOCKER_REPOSITORY
+    value: 'ginatells-ui'
 
-steps:
-- task: ECRPushImage@1
-  inputs:
-    regionName: 'us-west-2'
-    imageSource: 'imagename'
-    sourceImageName: 'ginatells-ui'
-    repositoryName: ${DOCKER_REPOSITORY_NAME}
+stages:
+- stage: Build
+  jobs:
+    - job: Build
+      steps:
+      - script: echo Building!
+      - task: Docker@2
+        displayName: Build image
+        inputs:
+          repository: $(DOCKER_REPOSITORY)
+          command: build
+          Dockerfile: Dockerfile
+          tags: |
+            latest
+      - task: ECRPushImage@1
+        displayName: Push image to ECR
+        inputs:
+          awsCredentials: 'AWS'
+          regionName: 'us-west-2'
+          imageSource: 'imagename'
+          sourceImageName: $(DOCKER_REPOSITORY)
+          repositoryName: $(DOCKER_REPOSITORY)
+          autoCreateRepository: true
+- stage: Test
+  jobs:
+    - job: UnitTests
+      displayName: Unit Tests
+      steps:
+      - script: echo Unit Testing!
+    - job: UITests
+      displayName: UI Tests
+      steps:
+      - script: echo UI Testing!
+- stage: Deploy
+  jobs:
+    - job: Deploy
+      steps:
+      - script: echo Deploying the code!
+      
