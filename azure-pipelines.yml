@@ -4,18 +4,20 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 trigger:
-- main
+  branches:
+    include:
+    - master
 
 pool:
   vmImage: 'ubuntu-latest'
 
-steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '10.x'
-  displayName: 'Install Node.js'
+variables:
+  - group: AWS
 
-- script: |
-    npm install
-    npm run build
-  displayName: 'npm install and build'
+steps:
+- task: ECRPushImage@1
+  inputs:
+    regionName: 'us-west-2'
+    imageSource: 'imagename'
+    sourceImageName: 'ginatells-ui'
+    repositoryName: ${DOCKER_REPOSITORY_NAME}
