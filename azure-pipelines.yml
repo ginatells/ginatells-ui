@@ -24,7 +24,7 @@ stages:
           command: build
           Dockerfile: Dockerfile
           tags: |
-            latest
+            release
       - task: ECRPushImage@1
         displayName: Push image to ECR
         inputs:
@@ -32,8 +32,10 @@ stages:
           regionName: 'us-west-2'
           imageSource: 'imagename'
           sourceImageName: $(DOCKER_REPOSITORY)
+          sourceImageTag: 'release'
           repositoryName: $(DOCKER_REPOSITORY)
-          autoCreateRepository: true
+          pushTag: 'release'
+
 - stage: Test
   jobs:
     - job: UnitTests
@@ -44,9 +46,19 @@ stages:
       displayName: UI Tests
       steps:
       - script: echo UI Testing!
+
 - stage: Deploy
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/release'))
   jobs:
     - job: Deploy
       steps:
       - script: echo Deploying the code!
+      - task: AWSCLI@1
+        inputs:
+          awsCredentials: 'AWS'
+          regionName: 'us-west-2'
+          awsCommand: 'ec2'
+          awsSubCommand: 'reboot-instances'
+          awsArguments: '--instance-ids i-02592d4ea12836306'
+          failOnStandardError: true
       
