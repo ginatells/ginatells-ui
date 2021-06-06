@@ -28,7 +28,7 @@ stages:
           customCommand: 'run test:CI'
 
 - stage: Deploy
-  condition: and(succeeded(), eq(variables['Test.SourceBranch'], 'refs/heads/release'))
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/release'))
   jobs:
     - job: Build
       steps:
