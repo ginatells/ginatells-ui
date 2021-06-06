@@ -1,21 +1,61 @@
-# Node.js with React
-# Build a Node.js project that uses React.
-# Add steps that analyze code, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
-
 trigger:
-- main
+  branches:
+    include:
+    - master
 
 pool:
   vmImage: 'ubuntu-latest'
 
-steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '10.x'
-  displayName: 'Install Node.js'
+variables:
+  - group: AWS
+  - name: DOCKER_REPOSITORY
+    value: 'ginatells-ui'
 
-- script: |
-    npm install
-    npm run build
-  displayName: 'npm install and build'
+stages:
+- stage: Test
+  jobs:
+    - job: UnitTests
+      displayName: Unit Tests
+      steps:
+      - task: Npm@1
+        displayName: Install Packages
+        inputs:
+          command: 'install'
+      - task: Npm@1
+        displayName: Run Unit Tests
+        inputs:
+          command: 'custom'
+          customCommand: 'run test:CI'
+
+- stage: Deploy
+  condition: and(succeeded(), eq(variables['Test.SourceBranch'], 'refs/heads/release'))
+  jobs:
+    - job: Build
+      steps:
+      - task: Docker@2
+        displayName: Build Image
+        inputs:
+          repository: $(DOCKER_REPOSITORY)
+          command: build
+          Dockerfile: Dockerfile
+          tags: |
+            latest
+      - task: ECRPushImage@1
+        displayName: Push image to ECR
+        inputs:
+          awsCredentials: 'AWS'
+          regionName: 'us-west-2'
+          imageSource: 'imagename'
+          sourceImageName: $(DOCKER_REPOSITORY)
+          sourceImageTag: 'latest'
+          repositoryName: $(DOCKER_REPOSITORY)
+          pushTag: 'latest'
+      - task: AWSCLI@1
+        displayName: Reboot EC2 Instance
+        inputs:
+          awsCredentials: 'AWS'
+          regionName: 'us-west-2'
+          awsCommand: 'ec2'
+          awsSubCommand: 'reboot-instances'
+          awsArguments: '--instance-ids i-02592d4ea12836306'
+          failOnStandardError: true
