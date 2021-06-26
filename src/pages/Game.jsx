@@ -1,17 +1,29 @@
+import { useState } from 'react'
+// import { useDispatch } from 'react-redux'
+import { ALTERNATIVES } from '../utils/constants'
+import { QUESTIONS } from '../utils/questions'
 import Question from '../components/Question'
 import Gina from '../images/gina.png'
-import { ALTERNATIVES } from '../utils/constants'
-
+// import questionsService from '../services/questionsService'
 
 import './Game.scss'
 
 function Game() {
+  const [questionIndex, setQuestionIndex] = useState(0)
+  // const dispatch = useDispatch()
+  async function selectOption(e) {
+    console.log({e});
+    setQuestionIndex(questionIndex+1)
+    // dispatch.session.increment({count: 1})
+    //await questionsService.postAnswer();
+  }
+
   return (
     <div className='game-container'>
-      <img src={Gina} alt='Gina' />
+      <img src={Gina} alt='Gina'/>
       <div>
-        <Question />
-        <ul>
+        <Question text={QUESTIONS[questionIndex].text}/>
+        <ul onClick={selectOption}>
           <li className={'background-green'}>{ALTERNATIVES.HIGHEST}</li>
           <li className={'background-lightgreen'}>{ALTERNATIVES.HIGH}</li>
           <li className={'background-blue'}>{ALTERNATIVES.MEDIUM}</li>
