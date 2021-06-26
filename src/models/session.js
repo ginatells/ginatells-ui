@@ -4,7 +4,6 @@ const session = {
   }, // initial state
   reducers: {
     update (state, payload) {
-      console.log(state, payload)
       return { ...state, ...payload }
     }
   },

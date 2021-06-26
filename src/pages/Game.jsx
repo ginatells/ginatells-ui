@@ -1,20 +1,20 @@
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+// import { useDispatch } from 'react-redux'
 import { ALTERNATIVES } from '../utils/constants'
 import { QUESTIONS } from '../utils/questions'
 import Question from '../components/Question'
 import Gina from '../images/gina.png'
-//import questionsService from '../services/questionsService'
+// import questionsService from '../services/questionsService'
 
 import './Game.scss'
 
 function Game() {
   const [questionIndex, setQuestionIndex] = useState(0)
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
   async function selectOption(e) {
     console.log({e});
     setQuestionIndex(questionIndex+1)
-    dispatch.session.increment({count: 1})
+    // dispatch.session.increment({count: 1})
     //await questionsService.postAnswer();
   }
 
