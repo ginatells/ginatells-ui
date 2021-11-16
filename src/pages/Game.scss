@@ -32,3 +32,14 @@ li.background-orange { background-color: #ffcc80; }
 li.background-orange:hover { background-color: #ffa726; }
 li.background-red { background-color: #ef9a9a; }
 li.background-red:hover { background-color: #ef5350; }
+
+.image-list {
+  margin-top: 50px;
+  text-align: center;
+}
+
+.movie-image {
+  height: 200px;
+  margin: 10px;
+  border-radius: 10px;
+}
