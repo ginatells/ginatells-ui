@@ -1,6 +1,8 @@
+import questionsService from './questionsService'
+
 describe('Questions service', () => {
   it('returns data successfully', () => {
     // TODO: Test service function
-    expect(true).toBe(true)
+    expect(questionsService).toBe(true)
   })
 })

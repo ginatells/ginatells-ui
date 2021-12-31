@@ -1,6 +1,6 @@
 import axiosConfig from "../axiosConfig"
 
-async function postAnswer() {
+async function postAnswer(p?: any) {
   const bodyMock = {
     "keywords": [
       {
@@ -22,7 +22,7 @@ async function postAnswer() {
 }
 
 const questionsService = {
-  postAnswer: (p) => postAnswer(p)
+  postAnswer: (p: any) => postAnswer(p)
 }
 
 export default questionsService
