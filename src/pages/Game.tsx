@@ -11,8 +11,7 @@ import './Game.scss'
 function Game() {
   const [questionIndex, setQuestionIndex] = useState(0)
   // const dispatch = useDispatch()
-  async function selectOption(e) {
-    console.log({e});
+  async function selectOption(e: any) {
     setQuestionIndex(questionIndex+1)
     // dispatch.session.increment({count: 1})
     //await questionsService.postAnswer();
