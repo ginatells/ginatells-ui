@@ -1,12 +1,16 @@
 import Game from './pages/Game'
-import { Provider } from 'react-redux'
-import { store } from './store'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-function App () {
-  return (  
-    <Provider store={store}>
-      <Game/>
-    </Provider>
+function App() {
+  return (
+    <div className='App'>
+      <Router>
+        <Routes>
+          <Route path='/' element={<Game />} />
+          <Route path='game' element={<Game />} />
+        </Routes>
+      </Router>
+    </div>
   )
 }
 
