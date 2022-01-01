@@ -1,6 +1,6 @@
 import axiosConfig from "../axiosConfig"
 
-async function postAnswer(p?: any) {
+async function postAnswer(keywordsData?: any) {
   const bodyMock = {
     "keywords": [
       {
@@ -13,9 +13,11 @@ async function postAnswer(p?: any) {
       }
     ]
   }
+  const body = {keywords: keywordsData}
   try {
-    const response = await axiosConfig.post('/Answer', bodyMock);
+    const response = await axiosConfig.post('/Answer', body);
     console.log(response);
+    return response;
   } catch (error) {
     console.log(error);
   }
