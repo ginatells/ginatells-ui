@@ -6,7 +6,4 @@ describe('<App/>', () => {
   it('renders without crashing', () => {
     expect(wrapper).toHaveLength(1)
   })
-  it('renders Game', () => {
-    expect(wrapper.find('Game')).toHaveLength(1)
-  })
 })
