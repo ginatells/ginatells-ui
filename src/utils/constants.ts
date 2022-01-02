@@ -9,3 +9,11 @@ export const ALTERNATIVES = {
   LOW: 'Not so Interested',
   LOWEST: 'Really Not Interested'
 }
+
+export const COLOR_PALETTE = {
+  DARK_BLACK: '#1E1E1E',
+  MEDIUM_BLACK: '#1E1E1E',
+  DARK_ORANGE: '#FA8700',
+  GRAY: '#989898',
+  WHITE: '#FFFFFF'
+}

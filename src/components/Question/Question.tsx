@@ -1,5 +1,5 @@
-import { ERRORS } from '../utils/constants'
-import './Question.scss'
+import { ERRORS } from '../../utils/constants'
+import * as S from './styles'
 
 interface QuestionProps {
   text?: string;
@@ -7,9 +7,9 @@ interface QuestionProps {
 
 function Question({ text = ERRORS.QUESTION_NOT_FOUND }: QuestionProps) {
   return (
-    <div className='question'>
+    <S.Question>
       {text}
-    </div>
+    </S.Question>
   )
 }
 
