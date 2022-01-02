@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import { ALTERNATIVES } from '../utils/constants'
-import { QUESTIONS } from '../utils/questions'
-import Question from '../components/Question'
-import Gina from '../images/gina.png'
-import questionsService from '../services/questionsService'
+import { ALTERNATIVES } from '../../utils/constants'
+import { QUESTIONS } from '../../utils/questions'
+import Question from '../../components/Question'
+import Gina from '../../images/gina.png'
+import questionsService from '../../services/questionsService'
 
 import './Game.scss'
 
