@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom';
 import { QUESTIONS } from '../../utils/questions'
 import { RootState } from '../../store'
 import { ALTERNATIVES } from '../../utils/constants'
@@ -27,6 +28,7 @@ type Keyword = {
 function Game() {
   const [keywords, setKeywords] = useState<Array<Keyword>>([]);
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const { questions, currentQuestionIndex } = useSelector((state: RootState) => state.game)
 
   const handleClick = (value: number) => {
@@ -39,7 +41,7 @@ function Game() {
     }
     currentQuestion.keyword.forEach((element: string) => processKeyword(element))
     setKeywords(keywords)
-    dispatch.game.answerQuestion({ keywords })
+    dispatch.game.answerQuestion({ keywords, navigate })
   }
 
   return (

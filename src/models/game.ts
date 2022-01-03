@@ -3,6 +3,7 @@ import type { RootModel } from './'
 import { QUESTIONS } from '../utils/questions'
 import questionsService from '../services/questionsService'
 
+
 type Question = {
   text: string,
   keyword: Array<string>,
@@ -29,14 +30,14 @@ export const game = createModel<RootModel>()({
     }
   },
   effects: (dispatch: any) => ({
-    async answerQuestion({ keywords }: any, rootState: any) {
+    async answerQuestion({ keywords, navigate }: any, rootState: any) {
       if (rootState.game.currentQuestionIndex < 4)
         return dispatch.game.update({ currentQuestionIndex: ++rootState.game.currentQuestionIndex })
       try {
         const res = await questionsService.postAnswer(keywords)
         const movies = res?.data?.results
         movies && dispatch.game.update({ movies })
-        dispatch()
+        navigate('/movies')
       } catch (err) {
         throw err
       }
