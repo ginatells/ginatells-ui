@@ -1,67 +1,73 @@
 import { useState } from 'react'
-import { ALTERNATIVES } from '../../utils/constants'
+import { useSelector, useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom';
 import { QUESTIONS } from '../../utils/questions'
-import Question from '../../components/Question'
-import Gina from '../../images/gina.png'
-import questionsService from '../../services/questionsService'
+import { RootState } from '../../store'
+import { ALTERNATIVES } from '../../utils/constants'
+import Question from '../../components/Question/Question'
+import gina from '../../assets/gina.png'
+import * as S from './styles'
 
-import './Game.scss'
-
+const colors = {
+  green: '#a5d6a7',
+  greenHover: '#66bb6a',
+  lightGreen: '#c5e1a5',
+  lightGreenHover: '#9ccc65',
+  blue: '#81d4fa',
+  blueHover: '#29b6f6',
+  orange: '#ffcc80',
+  orangeHover: '#ffa726',
+  red: '#ef9a9a',
+  redHover: '#ef5350'
+}
 type Keyword = {
   weight: number;
   keyword: string;
-};
-
+}
+    // TODO: Need to change keyword property to kewords
 function Game() {
-  const [questionIndex, setQuestionIndex] = useState(0);
   const [keywords, setKeywords] = useState<Array<Keyword>>([]);
-  const [movies, setMovies] = useState([]);
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const { questions, currentQuestionIndex } = useSelector((state: RootState) => state.game)
 
-  async function selectOption(value: any) {
-    QUESTIONS[questionIndex].keyword.forEach(element => {
-     const keyword: Keyword = keywords.find((key: any) => (key.keyword === element))!;
-
-
-      if (keyword) {
-        keyword.weight = keyword.weight + value;
-      } else {
-        keywords.push({
-          keyword: element,
-          weight: value
-        })
-      }
-    });
-    setKeywords(keywords);
-    if (questionIndex < 4) {
-      setQuestionIndex(questionIndex+1);
-    } 
-    else{
-      const response = await questionsService.postAnswer(keywords);
-      setMovies(response?.data.results.map((value: any, i: number) => {
-        return <img key={i} className='movie-image' src={`https://image.tmdb.org/t/p/w200${value.poster_path}`} alt="movie-poster"/>
-      }));
+  const handleClick = (value: number) => {
+    const currentQuestion = questions[currentQuestionIndex]
+    const processKeyword = (element: string) => {
+      const keyword = keywords.find((key: any) => (key.keyword === element))
+      keyword
+        ? keyword.weight = keyword.weight + value
+        : keywords.push({ keyword: element, weight: value })
     }
+    currentQuestion.keyword.forEach((element: string) => processKeyword(element))
+    setKeywords(keywords)
+    dispatch.game.answerQuestion({ keywords, navigate })
   }
 
   return (
-    <div>
-      <div className='game-container'>
-        <img src={Gina} alt='Gina'/>
-        <div>
-          <Question text={QUESTIONS[questionIndex].text}/>
-          <ul>
-            <li onClick={() => selectOption(2)} className={'background-green'}>{ALTERNATIVES.HIGHEST}</li>
-            <li onClick={() => selectOption(1)} className={'background-lightgreen'}>{ALTERNATIVES.HIGH}</li>
-            <li onClick={() => selectOption(0)} className={'background-blue'}>{ALTERNATIVES.MEDIUM}</li>
-            <li onClick={() => selectOption(-1)} className={'background-orange'}>{ALTERNATIVES.LOW}</li>
-            <li onClick={() => selectOption(-2)} className={'background-red'}>{ALTERNATIVES.LOWEST}</li>
-          </ul>
-        </div>
-      </div>
-      <div className="image-list">
-        {movies}
-      </div>
-    </div>
+    <S.Game>
+      <img src={gina} alt='Gina' />
+      <div>
+        <Question text={QUESTIONS[currentQuestionIndex].text} />
+        <S.AlternativesList>
+          <S.Alternative onClick={() => handleClick(2)} color={colors.green} colorHover={colors.greenHover}>
+            {ALTERNATIVES.HIGHEST}
+          </S.Alternative>
+          <S.Alternative onClick={() => handleClick(1)} color={colors.lightGreen} colorHover={colors.lightGreenHover}>
+            {ALTERNATIVES.HIGH}
+          </S.Alternative>
+          <S.Alternative onClick={() => handleClick(0)} color={colors.blue} colorHover={colors.blueHover}>
+            {ALTERNATIVES.MEDIUM}
+          </S.Alternative>
+          <S.Alternative onClick={() => handleClick(-1)} color={colors.orange} colorHover={colors.orangeHover}>
+            {ALTERNATIVES.LOW}
+          </S.Alternative>
+          <S.Alternative onClick={() => handleClick(-2)} color={colors.red} colorHover={colors.redHover}>
+            {ALTERNATIVES.LOWEST}
+          </S.Alternative >
+        </S.AlternativesList >
+      </div >
+    </S.Game >
   )
 }
 

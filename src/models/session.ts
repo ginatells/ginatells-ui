@@ -2,7 +2,7 @@ import { createModel } from '@rematch/core'
 import type { RootModel } from './'
 
 type Names = 'custom'
-type ComplexCountState = {
+type ComplexSessionState = {
 	count: number
 	multiplierName: Names
 }
@@ -10,7 +10,7 @@ type ComplexCountState = {
 export const session = createModel<RootModel>()({
   state: {
     count: 0
-  } as ComplexCountState, // initial state
+  } as ComplexSessionState, // initial state
   reducers: {
     update (state: any, payload: any) {
       return { ...state, ...payload }
