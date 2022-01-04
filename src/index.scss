@@ -7,8 +7,19 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-html, body, #root {
+html, body, #root, #app, #app > div {
   height: 100%;
+}
+
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 
 /* Breakpoints */
