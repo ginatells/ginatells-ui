@@ -1,3 +1,6 @@
+# docker build -t ginatells-ui -f Dockerfile.production
+# docker run --rm -p 3000:3000 ginatells-ui
+
 FROM node:17-alpine AS ui-build
 WORKDIR /usr/src/app
 COPY . ./
