@@ -1,14 +1,16 @@
 import styled from 'styled-components'
-import Balloon from '../../assets/balloon-white.png'
 import { COLOR_PALETTE } from '../../utils/constants'
 
 export const Question = styled.div`
-  background-image: url(${Balloon});
-  background-repeat: no-repeat;
-  background-position: top left;
-  background-size: 289px;
+  display: flex;
+  min-height: 80px;
+  max-width: 200px;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  padding-top: 80px;
-  padding-bottom: 150px;
-  color: ${ COLOR_PALETTE.DARK_BLACK };
+  padding: 1em;
+  background-color: ${COLOR_PALETTE.WHITE};
+  color: ${COLOR_PALETTE.DARK_BLACK};
+  border-radius: 16px;
+  border: 5px solid ${COLOR_PALETTE.DARK_BLACK};
 `

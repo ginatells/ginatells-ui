@@ -5,26 +5,37 @@ import { QUESTIONS } from '../../utils/questions'
 import { RootState } from '../../store'
 import { ALTERNATIVES } from '../../utils/constants'
 import Question from '../../components/Question/Question'
-import gina from '../../assets/gina.png'
+import UIButton from '../../components/UIButton/UIButton'
+import ImagePlaceholder from '../../components/ImagePlaceholder/ImagePlaceholder';
 import * as S from './styles'
 
 const colors = {
-  green: '#a5d6a7',
-  greenHover: '#66bb6a',
-  lightGreen: '#c5e1a5',
-  lightGreenHover: '#9ccc65',
-  blue: '#81d4fa',
-  blueHover: '#29b6f6',
-  orange: '#ffcc80',
-  orangeHover: '#ffa726',
-  red: '#ef9a9a',
-  redHover: '#ef5350'
+  green: {
+    main: '#a5d6a7',
+    hover: '#66bb6a',
+  },
+  lightGreen: {
+    main: '#c5e1a5',
+    hover: '#9ccc65',
+  },
+  blue: {
+    main: '#81d4fa',
+    hover: '#29b6f6',
+  },
+  orange: {
+    main: '#ffcc80',
+    hover: '#ffa726',
+  },
+  red: {
+    main: '#ef9a9a',
+    hover: '#ef5350'
+  }
 }
 type Keyword = {
   weight: number;
   keyword: string;
 }
-    // TODO: Need to change keyword property to kewords
+
 function Game() {
   const [keywords, setKeywords] = useState<Array<Keyword>>([]);
   const dispatch = useDispatch()
@@ -46,27 +57,40 @@ function Game() {
 
   return (
     <S.Game>
-      <img src={gina} alt='Gina' />
-      <div>
+      <S.Question>
+        <ImagePlaceholder />
         <Question text={QUESTIONS[currentQuestionIndex].text} />
-        <S.AlternativesList>
-          <S.Alternative onClick={() => handleClick(2)} color={colors.green} colorHover={colors.greenHover}>
+      </S.Question>
+      <ul>
+        <li>
+          <S.Alternative onClick={() => handleClick(2)} color={colors.green}>
             {ALTERNATIVES.HIGHEST}
           </S.Alternative>
-          <S.Alternative onClick={() => handleClick(1)} color={colors.lightGreen} colorHover={colors.lightGreenHover}>
+        </li>
+        <li>
+          <S.Alternative
+            onClick={() => handleClick(1)} color={colors.lightGreen}>
             {ALTERNATIVES.HIGH}
           </S.Alternative>
-          <S.Alternative onClick={() => handleClick(0)} color={colors.blue} colorHover={colors.blueHover}>
+        </li>
+        <li>
+          <S.Alternative onClick={() => handleClick(0)} color={colors.blue}>
             {ALTERNATIVES.MEDIUM}
           </S.Alternative>
-          <S.Alternative onClick={() => handleClick(-1)} color={colors.orange} colorHover={colors.orangeHover}>
-            {ALTERNATIVES.LOW}
-          </S.Alternative>
-          <S.Alternative onClick={() => handleClick(-2)} color={colors.red} colorHover={colors.redHover}>
+        </li>
+        <li><S.Alternative
+          onClick={() => handleClick(-1)} color={colors.orange}>
+          {ALTERNATIVES.LOW}
+        </S.Alternative>
+        </li>
+        <li>
+          <S.Alternative
+            onClick={() => handleClick(-2)} color={colors.red}>
             {ALTERNATIVES.LOWEST}
-          </S.Alternative >
-        </S.AlternativesList >
-      </div >
+          </S.Alternative>
+        </li>
+      </ul>
+      <UIButton onClick={() => alert('Not implemented!')} label='Show me' />
     </S.Game >
   )
 }

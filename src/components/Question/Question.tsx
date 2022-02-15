@@ -8,7 +8,7 @@ interface QuestionProps {
 function Question({ text = ERRORS.QUESTION_NOT_FOUND }: QuestionProps) {
   return (
     <S.Question>
-      {text}
+      <p>{text}</p>
     </S.Question>
   )
 }
