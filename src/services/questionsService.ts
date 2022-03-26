@@ -3,7 +3,7 @@ import axiosConfig from "../axiosConfig"
 async function postAnswer(keywordsData?: any) {
   const body = {keywords: keywordsData}
   try {
-    const response = await axiosConfig.post('/Answer', body);
+    const response = await axiosConfig.post('/search', body);
     return response;
   } catch (err) {
     console.error(err);
