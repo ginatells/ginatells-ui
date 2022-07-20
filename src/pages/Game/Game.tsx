@@ -11,24 +11,24 @@ import * as S from './styles'
 
 const colors = {
   green: {
-    main: '#a5d6a7',
-    hover: '#66bb6a',
+    main: '#66bb6a',
+    hover: '#a5d6a7',
   },
   lightGreen: {
-    main: '#c5e1a5',
-    hover: '#9ccc65',
+    main: '#9ccc65',
+    hover: '#c5e1a5',
   },
   blue: {
-    main: '#81d4fa',
-    hover: '#29b6f6',
+    main: '#29b6f6',
+    hover: '#81d4fa',
   },
   orange: {
-    main: '#ffcc80',
-    hover: '#ffa726',
+    main: '#ffa726',
+    hover: '#ffcc80',
   },
   red: {
-    main: '#ef9a9a',
-    hover: '#ef5350'
+    main: '#ef5350',
+    hover: '#ef9a9a'
   }
 }
 type Keyword = {
